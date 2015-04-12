@@ -27,5 +27,30 @@
 	<!-- Scripts -->
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        function check($count){
+            for (var i = 1; i < $count; i++) {
+                $.ajax({
+                    url: "more", // url запроса
+                    cache: false,
+                    data: { i: i }, // если нужно передать какие-то данные
+                    type: "POST", // устанавливаем типа запроса POST
+                    beforeSend: function(request) {  // нужно для защиты от CSRF
+                        return request.setRequestHeader('X-CSRF-Token', $("meta[name='csrf-token']").attr('content'));
+                    },
+                    success: function(data) {
+                        $('#status').append('<li>'+data+'</li>');
+                    } //контент подгружается в div#content
+                }).always(function () {
+                    alert('Вывел все статусы')
+                });
+            };
+        }
+    </script>
 </body>
 </html>

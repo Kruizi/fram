@@ -1,6 +1,7 @@
 <?php namespace Laravel\Http\Controllers;
 use Illuminate\Routing\Controller;
 use Laravel\People;
+use Request;
 class WelcomeController extends Controller {
 
     /**
@@ -54,30 +55,29 @@ class WelcomeController extends Controller {
     {
         /** Выводит ссылки */
         $good = People::get();
-        return view('check', compact('good'));
+        $countUrl = People::where('admin', '=', 0)->count();
+        return view('check', compact('good', 'countUrl'));
     }
 
-    public function getMoreEvents()
+    public function getMore()
     {
         if (Request::ajax()) {
+            $url = 'http://php.net';
+            $dataRow = array();
             /** Берем количество ссылок в базе*/
             $countUrl = People::where('admin', '=', 0)->count();
                 /** Сделаем цикл для обновлении ссылок*/
-                for($i = 1; $i < $countUrl; $i++)
-                    {
+                $i = $_POST['i'];
                         /** Берем саму ссылку*/
                         $users = People::where('id', '=', $i)->addSelect('desc')->get();
                             foreach($users as $u)
                             {
                                 /** Проверяем на статус*/
                                 $goods = get_headers('http://php.net/'.$u->desc);
-                                $html = $goods[0];
-                                return view('check', compact('html'));
                                 /** Обновляем*/
+                                return 'Эта ссылка: '.$url.$u->desc.'<br> ИМЕЕТ СТАТУС:'.$goods['0'];
                                 People::where('id', '=', $i)->update(['name' => $goods[0]]);
                             }
-
-                    }
         }
     }
     /**
