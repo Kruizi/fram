@@ -52,23 +52,25 @@ class WelcomeController extends Controller {
      */
     public function checkUrl()
     {
-        /** Берем количество ссылок в базе */
+        /** Берем количество ссылок в базе
         $countUrl = People::where('admin', '=', 0)->count();
-        /** Сделаем цикл для обновлении ссылок */
+        /** Сделаем цикл для обновлении ссылок
         for($i = 1; $i < $countUrl; $i++)
         {
-            /** Берем саму ссылку */
+            /** Берем саму ссылку
             $users = People::where('id', '=', $i)->addSelect('desc')->get();
             foreach($users as $u)
             {
-                /** Проверяем на статус */
+                /** Проверяем на статус
                 $goods = get_headers('http://php.net/'.$u->desc);
-                /** Обновляем */
+                /** Обновляем
                 People::where('id', '=', $i)->update(['name' => $goods[0]]);
             }
 
-        }
-        return view('check', compact('goods'));
+        }*/
+        /** Выводит ссылки */
+        $good = People::get();
+        return view('check', compact('good'));
     }
 
     /**
