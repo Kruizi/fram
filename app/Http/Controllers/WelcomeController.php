@@ -8,7 +8,7 @@ class WelcomeController extends Controller {
      */
     public function index()
     {
-        /** Ссылка на сайт(Она может быть любая, потом просто переправить метод откуда ее брать)  */
+        /** Ссылка на сайт(Она может быть любая, потом просто переправить метод откуда ее брать)   */
         $url = 'http://php.net/';
         /** Отправляем ссылку в метод который вернет страницу */
         $isDomainAvailible = $this->isDomainAvailible($url);
