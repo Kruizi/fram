@@ -10,7 +10,7 @@ class WelcomeController extends Controller {
     public function index()
     {
         /** Ссылка на сайт(Она может быть любая, потом просто переправить метод откуда ее брать)   */
-        $url = 'http://php.net/';
+        $url = 'http://realadmin.ru/';
         /** Отправляем ссылку в метод который вернет страницу */
         $isDomainAvailible = $this->isDomainAvailible($url);
         /** Проверяем на пустоту */
@@ -21,18 +21,28 @@ class WelcomeController extends Controller {
             for($i = 0; $i < count($isDomainAvailible['1']); $i++)
             {
                 /** Если попадутся ссылки подобия "http://www.php.net" или "https://"*/
-                if(strripos($isDomainAvailible['1'][$i], 'http') == 'true')
+                if(strripos($isDomainAvailible['1'][$i], 'htt') == 'true')
                 {
-                    /** Добавляем в бд уже обрезаную строку с помощью функции substr and strlen */
-                    People::insertGetId(
-                        array('desc' => ''.substr($isDomainAvailible['1'][$i], strlen($url)).'')
-                    );
+                    /** Добавляем в бд уже обрезаную строку с помощью функции substr and strlen + проверяем существуют-ли
+                     * там такая же ссылка
+                     */
+                    $url = People::where('desc', '=', ''.substr($isDomainAvailible['1'][$i], strlen($url)).'')->count();
+                    if($url == '0')
+                    {
+                        People::insertGetId(
+                            array('desc' => ''.substr($isDomainAvailible['1'][$i], strlen($url)).'')
+                        );
+                    }
                 }else
                 {
-                    /** Ну если нету то добавляем просто ссылку */
-                    People::insertGetId(
-                        array('desc' => ''.$isDomainAvailible['1'][$i].'')
-                    );
+                    $urls = People::where('desc', '=', ''.$isDomainAvailible['1'][$i].'')->count();
+                    if($urls == '0')
+                    {
+                        /** Ну если нету то добавляем просто ссылку */
+                        People::insertGetId(
+                            array('desc' => ''.$isDomainAvailible['1'][$i].'')
+                        );
+                    }
                 }
                 /**/
             }
@@ -68,7 +78,7 @@ class WelcomeController extends Controller {
     public function getMore()
     {
         if (Request::ajax()) {
-            $url = 'http://php.net';
+            $url = 'http://realadmin.ru/';
             $dataRow = array();
             /** Берем количество ссылок в базе*/
             $countUrl = People::where('admin', '=', 0)->count();
@@ -79,7 +89,7 @@ class WelcomeController extends Controller {
                             foreach($users as $u)
                             {
                                 /** Проверяем на статус*/
-                                $goods = get_headers('http://php.net/'.$u->desc);
+                                $goods = get_headers('http://realadmin.ru/'.$u->desc);
                                 /** Обновляем*/
                                 People::where('id', '=', $i)->update(['name' => $goods[0]]);
                                 if($goods[0] === 'HTTP/1.1 302 Found'){$danger = 'bg-danger';}else{ $danger='bg-s';}
