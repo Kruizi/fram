@@ -4,8 +4,6 @@
     <list default="true" id="29dba947-3178-4b5e-905b-fc87402e42aa" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/WelcomeController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/WelcomeController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/app.blade.php" afterPath="$PROJECT_DIR$/resources/views/app.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/check.blade.php" afterPath="$PROJECT_DIR$/resources/views/check.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="htdocs.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -50,14 +48,14 @@
       <file leaf-file-name="WelcomeController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/WelcomeController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7990599" vertical-offset="731" max-vertical-offset="1955">
-              <caret line="83" column="89" selection-start-line="83" selection-start-column="89" selection-end-line="83" selection-end-column="89" />
+            <state vertical-scroll-proportion="0.9189189" vertical-offset="731" max-vertical-offset="1938">
+              <caret line="89" column="7" selection-start-line="89" selection-start-column="7" selection-end-line="89" selection-end-column="7" />
               <folding>
                 <element signature="e#42#76#0#PHP" expanded="true" />
-                <marker date="1428845183756" expanded="true" signature="3328:3350" placeholder="..." />
-                <marker date="1428845183756" expanded="true" signature="3351:3363" placeholder="..." />
-                <marker date="1428845183756" expanded="true" signature="3351:3364" placeholder="..." />
-                <marker date="1428845183756" expanded="true" signature="3391:3413" placeholder="..." />
+                <marker date="1428845260544" expanded="true" signature="3328:3350" placeholder="..." />
+                <marker date="1428845260544" expanded="true" signature="3351:3363" placeholder="..." />
+                <marker date="1428845260544" expanded="true" signature="3351:3364" placeholder="..." />
+                <marker date="1428845260544" expanded="true" signature="3391:3413" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -641,10 +639,10 @@
           <caret line="83" column="53" selection-start-line="0" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
           <folding>
             <element signature="e#42#76#0#PHP" expanded="true" />
-            <marker date="1428845183756" expanded="true" signature="3328:3350" placeholder="..." />
-            <marker date="1428845183756" expanded="true" signature="3351:3363" placeholder="..." />
-            <marker date="1428845183756" expanded="true" signature="3351:3364" placeholder="..." />
-            <marker date="1428845183756" expanded="true" signature="3391:3413" placeholder="..." />
+            <marker date="1428845260544" expanded="true" signature="3328:3350" placeholder="..." />
+            <marker date="1428845260544" expanded="true" signature="3351:3363" placeholder="..." />
+            <marker date="1428845260544" expanded="true" signature="3351:3364" placeholder="..." />
+            <marker date="1428845260544" expanded="true" signature="3391:3413" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -740,10 +738,10 @@
           <caret line="16" column="32" selection-start-line="0" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
           <folding>
             <element signature="e#42#76#0#PHP" expanded="true" />
-            <marker date="1428845183756" expanded="true" signature="3328:3350" placeholder="..." />
-            <marker date="1428845183756" expanded="true" signature="3351:3363" placeholder="..." />
-            <marker date="1428845183756" expanded="true" signature="3351:3364" placeholder="..." />
-            <marker date="1428845183756" expanded="true" signature="3391:3413" placeholder="..." />
+            <marker date="1428845260544" expanded="true" signature="3328:3350" placeholder="..." />
+            <marker date="1428845260544" expanded="true" signature="3351:3363" placeholder="..." />
+            <marker date="1428845260544" expanded="true" signature="3351:3364" placeholder="..." />
+            <marker date="1428845260544" expanded="true" signature="3391:3413" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -1049,14 +1047,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/WelcomeController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7990599" vertical-offset="731" max-vertical-offset="1955">
-          <caret line="83" column="89" selection-start-line="83" selection-start-column="89" selection-end-line="83" selection-end-column="89" />
+        <state vertical-scroll-proportion="0.9189189" vertical-offset="731" max-vertical-offset="1938">
+          <caret line="89" column="7" selection-start-line="89" selection-start-column="7" selection-end-line="89" selection-end-column="7" />
           <folding>
             <element signature="e#42#76#0#PHP" expanded="true" />
-            <marker date="1428845183756" expanded="true" signature="3328:3350" placeholder="..." />
-            <marker date="1428845183756" expanded="true" signature="3351:3363" placeholder="..." />
-            <marker date="1428845183756" expanded="true" signature="3351:3364" placeholder="..." />
-            <marker date="1428845183756" expanded="true" signature="3391:3413" placeholder="..." />
+            <marker date="1428845260544" expanded="true" signature="3328:3350" placeholder="..." />
+            <marker date="1428845260544" expanded="true" signature="3351:3363" placeholder="..." />
+            <marker date="1428845260544" expanded="true" signature="3351:3364" placeholder="..." />
+            <marker date="1428845260544" expanded="true" signature="3391:3413" placeholder="..." />
           </folding>
         </state>
       </provider>

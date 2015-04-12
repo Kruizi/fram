@@ -88,7 +88,6 @@ class WelcomeController extends Controller {
         }
     }
     /**
-    return 'Эта ссылка: '.$url.$u->desc.'<br> ИМЕЕТ СТАТУС:'.$goods['0'];
      * @return array
      */
     private function isDomainAvailible($url)
