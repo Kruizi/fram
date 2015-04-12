@@ -53,12 +53,18 @@ class WelcomeController extends Controller {
      */
     public function checkUrl()
     {
-        /** Выводит ссылки */
+        /** Выводит Все из БД */
         $good = People::get();
+        /** Берем количество ссылок */
         $countUrl = People::where('admin', '=', 0)->count();
         return view('check', compact('good', 'countUrl'));
     }
 
+    /**
+     * @return string
+     * Этот метод для AJAX
+     * Он обновляет, добавляет и выводит ссылки
+     */
     public function getMore()
     {
         if (Request::ajax()) {
@@ -75,12 +81,14 @@ class WelcomeController extends Controller {
                                 /** Проверяем на статус*/
                                 $goods = get_headers('http://php.net/'.$u->desc);
                                 /** Обновляем*/
-                                return 'Эта ссылка: '.$url.$u->desc.'<br> ИМЕЕТ СТАТУС:'.$goods['0'];
                                 People::where('id', '=', $i)->update(['name' => $goods[0]]);
+                                if($goods[0] === 'HTTP/1.1 302 Found'){$danger = 'bg-danger';}else{ $danger='bg-s';}
+                                return '<p  style="float: left; margin:0;">Эта ссылка: '.$url.$u->desc.'<p style="float: right;margin:0;" class="'.$danger.'">'.$goods['0'].'</p>';
                             }
         }
     }
     /**
+    return 'Эта ссылка: '.$url.$u->desc.'<br> ИМЕЕТ СТАТУС:'.$goods['0'];
      * @return array
      */
     private function isDomainAvailible($url)
