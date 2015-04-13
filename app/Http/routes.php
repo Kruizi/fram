@@ -15,12 +15,12 @@
     Route::bind('people', function($id){
         return Laravel\People::whereId($id)->first();
     });
-    Route::get('/check-url', 'WelcomeController@checkUrl');
+    Route::get('/check-url', 'StatusController@index');
     Route::get('/edit/{id}', 'WelcomeController@edit');
     Route::get('/delete/{id}', 'WelcomeController@delete');
     Route::get('/login', 'UserController@login' );
 // POST-запрос при нажатии на нашу кнопку.
-    Route::post('/more', array('before'=>'csrf-ajax', 'as'=>'more', 'uses'=>'WelcomeController@getMore'));
+    Route::post('/more', array('before'=>'csrf-ajax', 'as'=>'more', 'uses'=>'StatusController@getMore'));
 
 // Фильтр, срабатывающий перед пост запросом.
     Route::filter('csrf-ajax', function()

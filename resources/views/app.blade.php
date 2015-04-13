@@ -7,8 +7,14 @@
     <meta name="csrf-token" content="<?php echo csrf_token(); ?>">
 	<title>Laravel</title>
 
-	<link href="{{ asset('/css/app.css') }}" rel="stylesheet">
-
+	<link href="{{ asset('public/css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/css/bootstrap-theme.min.css') }}" rel="stylesheet">
+    <style>
+        li{
+            list-style-type: none;
+        }
+    </style>
 	<!-- Fonts -->
 	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
 
@@ -33,7 +39,17 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+        $(document).ready(function () {
+            $('#removeUrl').fadeOut();
+        });
         function check($count){
+            $('#status li').remove();
+            if($count == '0')
+            {
+                $('#loading-example-btn').attr('disabled', 'disabled');
+                $('#loading-example-btn').text('База данных пуста');
+                $('#removeUrl').fadeIn();
+            }
             for (var i = 1; i < $count; i++) {
                 $.ajax({
                     url: "more", // url запроса
@@ -44,7 +60,7 @@
                         return request.setRequestHeader('X-CSRF-Token', $("meta[name='csrf-token']").attr('content'));
                     },
                     success: function(data) {
-                        $('#status').append('<li>'+data+'</li>');
+                        $('#status').append('<li class="bg-success" style="margin: 10px; width: 100%;overflow: hidden;">'+data+'</li>');
                     } //контент подгружается в div#content
                 }).always(function () {
                     alert('Вывел все статусы')

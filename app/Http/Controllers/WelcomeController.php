@@ -5,100 +5,23 @@ use Request;
 class WelcomeController extends Controller {
 
     /**
-     * @return \Illuminate\View\View
-     */
-    public function index()
-    {
-        /** Ссылка на сайт(Она может быть любая, потом просто переправить метод откуда ее брать)   */
-        $url = 'http://realadmin.ru/';
-        /** Отправляем ссылку в метод который вернет страницу */
-        $isDomainAvailible = $this->isDomainAvailible($url);
-        /** Проверяем на пустоту */
-        if (!empty($isDomainAvailible)) {
-            /** Делаем цикл, где указываем сколько элементов в массиве и указываем ему [1] то есть на готовые ссылки
-             * бзе html
-             */
-            for($i = 0; $i < count($isDomainAvailible['1']); $i++)
-            {
-                /** Если попадутся ссылки подобия "http://www.php.net" или "https://"*/
-                if(strripos($isDomainAvailible['1'][$i], 'htt') == 'true')
-                {
-                    /** Добавляем в бд уже обрезаную строку с помощью функции substr and strlen + проверяем существуют-ли
-                     * там такая же ссылка
-                     */
-                    $url = People::where('desc', '=', ''.substr($isDomainAvailible['1'][$i], strlen($url)).'')->count();
-                    if($url == '0')
-                    {
-                        People::insertGetId(
-                            array('desc' => ''.substr($isDomainAvailible['1'][$i], strlen($url)).'')
-                        );
-                    }
-                }else
-                {
-                    $urls = People::where('desc', '=', ''.$isDomainAvailible['1'][$i].'')->count();
-                    if($urls == '0')
-                    {
-                        /** Ну если нету то добавляем просто ссылку */
-                        People::insertGetId(
-                            array('desc' => ''.$isDomainAvailible['1'][$i].'')
-                        );
-                    }
-                }
-                /**/
-            }
-            /** Выводит ссылки */
-            $good = People::get();
-        }else
-        {
-            /** Если пришел пустой массив выведем ошибкуу */
-            $good = 'Error array';
-        }
-        return view('index', compact('good'));
-    }
-
-    /**
-     * @return \Illuminate\View\View
-     * Проверяем ссылки на доступность
-     * Метод работает через роуте
-     */
-    public function checkUrl()
-    {
-        /** Выводит Все из БД */
-        $good = People::get();
-        /** Берем количество ссылок */
-        $countUrl = People::where('admin', '=', 0)->count();
-        return view('check', compact('good', 'countUrl'));
-    }
-
-    /**
      * @return string
-     * Этот метод для AJAX
-     * Он обновляет, добавляет и выводит ссылки
+     * URL сайта
+     * -----------------------------------------------------------------------
+     * ИСПРАВИТЬ ЧТОБЫ МОЖНО БЫЛО ВЗЯТЬ ИЗ БД
+     * или при клике
      */
-    public function getMore()
-    {
-        if (Request::ajax()) {
-            $url = 'http://realadmin.ru/';
-            $dataRow = array();
-            /** Берем количество ссылок в базе*/
-            $countUrl = People::where('admin', '=', 0)->count();
-                /** Сделаем цикл для обновлении ссылок*/
-                $i = $_POST['i'];
-                        /** Берем саму ссылку*/
-                        $users = People::where('id', '=', $i)->addSelect('desc')->get();
-                            foreach($users as $u)
-                            {
-                                /** Проверяем на статус*/
-                                $goods = get_headers('http://realadmin.ru/'.$u->desc);
-                                /** Обновляем*/
-                                People::where('id', '=', $i)->update(['name' => $goods[0]]);
-                                if($goods[0] === 'HTTP/1.1 302 Found'){$danger = 'bg-danger';}else{ $danger='bg-s';}
-                                return '<p  style="float: left; margin:0;">Эта ссылка: '.$url.$u->desc.'<p style="float: right;margin:0;" class="'.$danger.'">'.$goods['0'].'</p>';
-                            }
+    public function urls(){
+        $url = "http://web-sellers.ru";
+        if (preg_match('/^(http|https):\/\/([A-Z0-9][A-Z0-9_-]*(?:.[A-Z0-9][A-Z0-9_-]*)+):?(d+)?/i', $url)) {
+            return $url;
+        } else {
+            abort(404);
         }
     }
     /**
      * @return array
+     * Парсим ссылки
      */
     private function isDomainAvailible($url)
     {
@@ -115,4 +38,157 @@ class WelcomeController extends Controller {
         return $links; //возвращаем  полученную страницу
 
     }
+    /**
+     * @return int
+     * Количество символов в нашем url
+     */
+    public function num(){
+        return strlen($this->urls());
+    }
+
+    /**
+     * @return array
+     * Возвращаем массив ссылок
+     */
+    public function arrayUrl($url)
+    {
+        $isDomainAvailible = $this->isDomainAvailible($url);
+        return $isDomainAvailible;
+    }
+
+    /**
+     * @param $http
+     * @return mixed
+     * обрезает ссылку убираем адрес
+     */
+    public function strReplace($http)
+    {
+       return parse_url($http, PHP_URL_PATH);
+    }
+
+    /**
+     * @param $url
+     * @return mixed
+     * количество одинаковых названий в БД
+     */
+    public function countBD($url)
+    {
+        return People::where('desc', '=', ''.$url.'')->count();
+    }
+
+    /**
+     * @param $where
+     * добавляем в БД обрезанную строку и оригинальную
+     */
+    public function whereInsert($where,$where_orig)
+    {
+        People::insertGetId(array('desc' => ''.$where.'', 'original_url' => ''.$where_orig.''));
+    }
+
+    /**
+     * @return \Illuminate\View\View
+     * Выводим ссылки и добавляем в БД
+     */
+    public function index()
+    {
+        /**
+         * Ловим массив с ссылками
+         */
+        $isDomainAvailible = $this->arrayUrl($this->urls());
+        /**
+         * Делаем проверку на пустоту
+         */
+        if (!empty($isDomainAvailible)) {
+            /**
+             * Делаем цикл
+             */
+            for($i = 0; $i < count($isDomainAvailible['1']); $i++)
+            {
+                /**
+                 * проверяем есть ли в нашей строке "http|https"
+                 */
+                if(strripos($isDomainAvailible['1'][$i], 'htt') == 'true')
+                {
+                    /**
+                     * через strReplace достаем все что после http://example.ru/то что нужно взять/
+                     */
+                    $http = $this->strReplace($isDomainAvailible['1'][$i]);
+                    /**
+                     * Ищем в БД схожие записи
+                     */
+                    if ($this->countBD($http) == '0')
+                        {
+                            /**
+                             * Добавляем в БД нынешнию запись и настоящию
+                             */
+                            $this->whereInsert($http,$isDomainAvailible['1'][$i]);
+                        }
+                            /**
+                             * Делаем поиск ссылок которые есть в БД
+                             * И в них ищим другие ссылки которых нет в БД
+                             */
+                            $isDomainAvailibleCub = $this->isDomainAvailible($this->urls().$http);
+                            /**
+                             * Делаем массив который будет добавлять новые ссылки в БД
+                             */
+                            foreach($isDomainAvailibleCub[1] as $is)
+                            {
+                                        $is_rep = $this->strReplace($is);
+
+                                        if($this->countBD($is_rep) == '0')
+                                        {
+                                            $this->whereInsert($is_rep,$is);
+                                        }
+                            }
+                }else
+                {
+                    /**
+                     * через strReplace достаем все что после http://example.ru/то что нужно взять/
+                     */
+                    $http = $this->strReplace($isDomainAvailible['1'][$i]);
+                    /**
+                     * Ищем в БД схожие записи
+                     */
+                    if ($this->countBD($http) == '0')
+                    {
+                        /**
+                         * Добавляем в БД нынешнию запись и настоящию
+                         */
+                        $this->whereInsert($http,$isDomainAvailible['1'][$i]);
+                    }
+                    /**
+                     * Делаем поиск ссылок которые есть в БД
+                     * И в них ищим другие ссылки которых нет в БД
+                     */
+                    $isDomainAvailibleCub = $this->isDomainAvailible($this->urls().$http);
+                    /**
+                     * Делаем массив который будет добавлять новые ссылки в БД
+                     */
+                    foreach($isDomainAvailibleCub[1] as $is)
+                    {
+                        $is_rep = $this->strReplace($is);
+
+                        if($this->countBD($is_rep) == '0')
+                        {
+                            $this->whereInsert($is_rep,$is);
+                        }
+                    }
+                }
+            }
+            }else
+            {
+                $good = 'Error array';
+            }
+        /**
+         * Возвращает количество уникальных ссылок
+         */
+        $countDesc = People::where('admin', '=', '0')->count();
+        /**
+         * @return array BD
+         */
+        $good = People::get();
+
+        return view('index', compact('good', 'countDesc'));
+    }
+
 }
