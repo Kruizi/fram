@@ -1,8 +1,6 @@
 @extends('appHome')
 
 @section('contentHome')
-
-    <!-- END HEAD -->
     <!-- BEGIN BODY -->
     <body class="fixed-top">
     <!-- BEGIN HEADER -->
