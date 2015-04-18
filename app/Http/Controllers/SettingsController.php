@@ -64,7 +64,12 @@ class SettingsController extends Controller {
     {
         if(strripos($http, 'htt') == 'true')
         {
-            return parse_url($http, PHP_URL_PATH);
+            if(stripos($http, 'metrika') == 'true')
+            {
+                return 'метрика';
+            }else{
+                return parse_url($http, PHP_URL_PATH);
+            }
         }else{
             return $http;
         }

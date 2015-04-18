@@ -1,5 +1,5 @@
 <?php namespace Laravel\Http\Controllers;
-use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 use Laravel\People;
 use Request;
 
@@ -18,6 +18,7 @@ class WelcomeController extends SettingsController {
          * @return array BD
          */
         $good = People::allData();
+        Auth::user();
         return view('index', compact('good', 'countDesc'));
     }
 

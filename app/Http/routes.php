@@ -12,12 +12,7 @@
 */
 
     Route::get('/', 'WelcomeController@index');
-    Route::bind('people', function($id){
-        return Laravel\People::whereId($id)->first();
-    });
     Route::get('/check-url', 'StatusController@index');
-    Route::get('/edit/{id}', 'WelcomeController@edit');
-    Route::get('/delete/{id}', 'WelcomeController@delete');
     // POST-запрос при нажатии на нашу кнопку.
     Route::post('/more', array('before'=>'csrf-ajax', 'as'=>'more', 'uses'=>'StatusController@getMore'));
     Route::post('/check', array('before'=>'csrf-ajax', 'as'=>'check', 'uses'=>'WelcomeController@getUrl'));
@@ -30,3 +25,8 @@
             throw new Illuminate\Session\TokenMismatchException;
         }
     });
+
+    Route::controllers([
+        'auth' => 'Auth\AuthController',
+        'password' => 'Auth\PasswordController',
+    ]);
