@@ -1,95 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="ru"> <!--<![endif]-->
+<!-- BEGIN HEAD -->
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="<?php echo csrf_token(); ?>">
-	<title>Laravel</title>
-
-	<link href="{{ asset('public/css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('public/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('public/css/bootstrap-theme.min.css') }}" rel="stylesheet">
-    <style>
-        li{
-            list-style-type: none;
-        }
-    </style>
-	<!-- Fonts -->
-	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
-
-	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-	<!--[if lt IE 9]>
-		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-	<![endif]-->
+    <meta charset="utf-8" />
+    <title>Авторизация</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <link href="{{ asset('public/assets/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('public/assets/css/metro.css') }}" rel="stylesheet" />
+    <link href="{{ asset('public/assets/font-awesome/css/font-awesome.css') }}" rel="stylesheet" />
+    <link href="{{ asset('public/assets/css/style.css') }}" rel="stylesheet" />
+    <link href="{{ asset('public/assets/css/style_responsive.css') }}" rel="stylesheet" />
+    <link href="{{ asset('public/assets/css/style_default.css') }}" rel="stylesheet" id="style_color" />
+    <link href="{{ asset('public/assets/uniform/css/uniform.default.css') }}" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('public/assets/gritter/css/jquery.gritter.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('public/assets/bootstrap-daterangepicker/daterangepicker.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('public/assets/fullcalendar/fullcalendar/bootstrap-fullcalendar.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('public/assets/jqvmap/jqvmap/jqvmap.css') }}" />
+    <link rel="shortcut icon" href="{{ asset('public/assets/images/favicon.ico') }}" />
+    <script src="{{ asset('public/js/script.js') }}"></script>
 </head>
-<body>
 
 
 	@yield('content')
-
-	<!-- Scripts -->
-	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <!-- BEGIN JAVASCRIPTS -->
+    <script src="{{ asset('public/assets/js/jquery-1.8.3.min.js') }}"></script>
+    <script src="{{ asset('public/assets/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('public/uniform/jquery.uniform.min.js') }}"></script>
+    <script src="{{ asset('public/assets/js/jquery.blockui.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('public/assets/jquery-validation/dist/jquery.validate.js') }}"></script>
+    <script src="{{ asset('public/assets/js/app.js') }}"></script>
     <script>
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
+        jQuery(document).ready(function() {
+            App.initLogin();
         });
-        $(document).ready(function () {
-            $('#removeUrl').fadeOut();
-        });
-        function check($count){
-            $('#status li').remove();
-            if($count == '0')
-            {
-                $('#loading-example-btn').attr('disabled', 'disabled').text('База данных пуста');
-                $('#removeUrl').fadeIn();
-            }
-            for (var i = 1; i < $count; i++) {
-                $.ajax({
-                    url: "more", // url запроса
-                    cache: false,
-                    data: { i: i }, // если нужно передать какие-то данные
-                    type: "POST", // устанавливаем типа запроса POST
-                    beforeSend: function(request) {  // нужно для защиты от CSRF
-                        return request.setRequestHeader('X-CSRF-Token', $("meta[name='csrf-token']").attr('content'));
-                    },
-                    success: function(data) {
-                        $('#status').append('<li class="bg-success" style="margin: 10px; width: 100%;overflow: hidden;">'+data+'</li>');
-                    } //контент подгружается в div#content
-                }).always(function () {
-                    alert('Вывел все статусы')
-                });
-            }
-        }
-        function url(url){
-            if(/^((https?|ftp)\:\/\/)?([a-z0-9]{1})((\.[a-z0-9-])|([a-z0-9-]))*\.([a-z]{2,6})(\/?)$/.test(url) == true){
-                alert('Начинается парсинг этого '+url+' сайта');
-                $('#status li').remove();
-                for (var is = 1; is < 100; is++) {
-                    var i = 1;
-                    $.ajax({
-                        url: "check", // url запроса
-                        cache: false,
-                        data: {iss: 'iss'}, // если нужно передать какие-то данные
-                        type: "POST", // устанавливаем типа запроса POST
-                        beforeSend: function (request) {  // нужно для защиты от CSRF
-                            return request.setRequestHeader('X-CSRF-Token', $("meta[name='csrf-token']").attr('content'));
-                        },
-                        success: function (data) {
-                            $('#status').append('<li class="bg-success" style="margin: 10px; width: 100%;overflow: hidden;">' + data + '</li>');
-                            $('#count').empty().text(i++);
-                        } //контент подгружается в div#content
-                    })
-                }
-            } else {
-                alert('no');
-            }
-        }
     </script>
+    <!-- END JAVASCRIPTS -->
 </body>
 </html>

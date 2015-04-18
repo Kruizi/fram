@@ -5,9 +5,15 @@ use Request;
 
 class WelcomeController extends SettingsController {
     /**
-     * @return \Illuminate\View\View
-     * Выводим ссылки и добавляем в БД
+     * Create a new controller instance.
+     *
+     * @return void
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         /**

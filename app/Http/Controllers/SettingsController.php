@@ -1,9 +1,6 @@
 <?php namespace Laravel\Http\Controllers;
 
 use Laravel\Http\Requests;
-use Laravel\Http\Controllers\Controller;
-
-use Illuminate\Http\Request;
 
 class SettingsController extends Controller {
     /**
