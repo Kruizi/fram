@@ -5,6 +5,14 @@ use Request;
 
 class StatusController extends WelcomeController {
     /**
+     * @param Status $status
+     */
+    public function __construct(Status $status)
+    {
+        $this->Status = $status;
+    }
+
+    /**
      * @return \Illuminate\View\View
      * Проверяем ссылки на доступность
      * Метод работает через роуте
@@ -12,9 +20,8 @@ class StatusController extends WelcomeController {
 	public function index()
 	{
         /** Выводит Все из БД */
-        $good = Status::get();
+        $good = $this->Status->get();
         /** Берем количество ссылок */
-        $countUrl = Status::where('admin', '=', 0)->count();
         return view('check', compact('good', 'countUrl'));
     }
 
@@ -23,12 +30,10 @@ class StatusController extends WelcomeController {
      * Этот метод для AJAX
      * Он обновляет, добавляет и выводит ссылки
      */
-    public function getMore()
+    private function getMore()
     {
         if (Request::ajax()) {
             $dataRow = array();
-            /** Берем количество ссылок в базе*/
-            $countUrl = Status::where('admin', '=', 0)->count();
             /** Сделаем цикл для обновлении ссылок*/
             $i = $_POST['i'];
             /** Берем саму ссылку*/
@@ -39,7 +44,7 @@ class StatusController extends WelcomeController {
                 $goods = get_headers($this->urls().$u->desc);
                 /** Обновляем*/
                 Status::where('id', '=', $i)->update(['name' => $goods[0]]);
-                if($goods[0] === 'HTTP/1.1 302 Found' AND $goods[0] == 'HTTP/1.1 404 Not Found'){$danger = 'bg-danger';}else{ $danger='bg-s';}
+                if($goods[0] === 'HTTP/1.1 302 Found' || $goods[0] == 'HTTP/1.1 404 Not Found'){$danger = 'bg-danger';}else{ $danger='bg-s';}
                 return '<p  style="float: left; margin:0;">Эта ссылка: '.$this->urls().$u->desc.'<p style="float: right;margin:0;" class="'.$danger.'">'.$goods['0'].'</p>';
             }
         }
