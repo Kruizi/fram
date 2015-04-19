@@ -24,61 +24,40 @@
                     <li class="dropdown" id="header_notification_bar">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="icon-warning-sign"></i>
-                            <span class="badge">6</span>
+                            <span class="badge">1</span>
                         </a>
                         <ul class="dropdown-menu extended notification">
                             <li>
-                                <p>You have 14 new notifications</p>
-                            </li>
-                            <li>
-                                <a href="javascript:;" onclick="App.onNotificationClick(1)">
-                                    <span class="label label-success"><i class="icon-plus"></i></span>
-                                    New user registered.
-                                    <span class="time">Just now</span>
-                                </a>
+                                <p>У вас 0 уведомлений</p>
                             </li>
                             <li>
                                 <a href="#">
                                     <span class="label label-important"><i class="icon-bolt"></i></span>
-                                    Server #12 overloaded.
-                                    <span class="time">15 mins</span>
+                                    Ошибка на сайте http://web-sellers.ru/
+                                    <span class="time">10 мин</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="#">
                                     <span class="label label-warning"><i class="icon-bell"></i></span>
-                                    Server #2 not respoding.
-                                    <span class="time">22 mins</span>
+                                    Уведомляем вас что была произведенна проверка на доступность этого сайте http://web-sellers.ru/
+                                    <span class="time">30 мин</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="#">
-                                    <span class="label label-info"><i class="icon-bullhorn"></i></span>
-                                    Application error.
-                                    <span class="time">40 mins</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <span class="label label-important"><i class="icon-bolt"></i></span>
-                                    Database overloaded 68%.
-                                    <span class="time">2 hrs</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <span class="label label-important"><i class="icon-bolt"></i></span>
-                                    2 user IP blocked.
-                                    <span class="time">5 hrs</span>
+                                    <span class="label label-warning"><i class="icon-bell"></i></span>
+                                    В 03:30 была произведенна проверка этого сайт http://web-sellers.ru/ ошибок не найденно
+                                    <span class="time">в 03:30</span>
                                 </a>
                             </li>
                             <li class="external">
-                                <a href="#">See all notifications <i class="m-icon-swapright"></i></a>
+                                <a href="/web">Все сайты <i class="m-icon-swapright"></i></a>
                             </li>
                         </ul>
                     </li>
                     <!-- END NOTIFICATION DROPDOWN -->
-                    <!-- BEGIN INBOX DROPDOWN -->
+                    <!-- BEGIN INBOX DROPDOWN
                     <li class="dropdown" id="header_inbox_bar">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="icon-envelope-alt"></i>
@@ -133,7 +112,7 @@
                         </ul>
                     </li>
                     <!-- END INBOX DROPDOWN -->
-                    <!-- BEGIN TODO DROPDOWN -->
+                    <!-- BEGIN TODO DROPDOWN
                     <li class="dropdown" id="header_task_bar">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="icon-tasks"></i>
@@ -218,16 +197,15 @@
                     <!-- BEGIN USER LOGIN DROPDOWN -->
                     <li class="dropdown user">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img alt="" src="{{ asset('public/assets/img/avatar1_small.jpg') }}" />
-                            <span class="username">Bob Nilson</span>
+                            <img alt="" class="img-circle" src="{{ asset('public/assets/img/avatar1_small.jpg') }}" />
+                            <span class="username">{{$name}}</span>
                             <i class="icon-angle-down"></i>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="extra_profile.html"><i class="icon-user"></i> My Profile</a></li>
-                            <li><a href="calendar.html"><i class="icon-calendar"></i> My Calendar</a></li>
-                            <li><a href="#"><i class="icon-tasks"></i> My Tasks</a></li>
+                            <li><a href="/profile"><i class="icon-user"></i> Мой профиль</a></li>
+                            <li><a href="/my-calendar"><i class="icon-calendar"></i> Мой календарь</a></li>
                             <li class="divider"></li>
-                            <li><a href="login.html"><i class="icon-key"></i> Log Out</a></li>
+                            <li><a href="/auth/logout"><i class="icon-key"></i> Log Out</a></li>
                         </ul>
                     </li>
                     <!-- END USER LOGIN DROPDOWN -->

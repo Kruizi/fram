@@ -1,4 +1,5 @@
 <?php namespace Laravel\Http\Controllers;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\Auth;
 use Laravel\People;
 use Request;
@@ -14,18 +15,15 @@ class WelcomeController extends SettingsController {
         $this->middleware('auth');
     }
 
-    public function index()
+    public function index(Authenticatable $user)
     {
-        /**
-         * Возвращает количество уникальных ссылок
-         */
-        $countDesc = People::allCount();
         /**
          * @return array BD
          */
         $good = People::allData();
         Auth::user();
-        return view('index', compact('good', 'countDesc'));
+        $name = $user->name;
+        return view('index', compact('good', 'name'));
     }
 
     public function getUrl(){

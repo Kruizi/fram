@@ -24,39 +24,39 @@
 
 	@yield('contentHome')
     <!-- BEGIN JAVASCRIPTS -->
-    <script src="{{ asset('public/assets/js/jquery-1.8.3.min.js') }}"></script>
-    <!--[if lt IE 9]>
-    <script src="{{ asset('public/assets/js/excanvas.js') }}"></script>
-    <script src="{{ asset('public/assets/js/respond.js') }}"></script>
-    <![endif]-->
-    <script src="{{ asset('public/assets/breakpoints/breakpoints.js') }}"></script>
-    <script src="{{ asset('public/assets/jquery-ui/jquery-ui-1.10.1.custom.min.js') }}"></script>
-    <script src="{{ asset('public/assets/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
-    <script src="{{ asset('public/assets/fullcalendar/fullcalendar/fullcalendar.min.js') }}"></script>
-    <script src="{{ asset('public/assets/js/jquery.cookie.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('public/assets/jqvmap/jqvmap/jquery.vmap.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('public/assets/jqvmap/jqvmap/maps/jquery.vmap.russia.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('public/assets/jqvmap/jqvmap/maps/jquery.vmap.world.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('public/assets/jqvmap/jqvmap/maps/jquery.vmap.europe.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('public/assets/jqvmap/jqvmap/maps/jquery.vmap.germany.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('public/assets/jqvmap/jqvmap/maps/jquery.vmap.usa.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('public/assets/jqvmap/jqvmap/data/jquery.vmap.sampledata.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('public/assets/flot/jquery.flot.js') }}"></script>
-    <script src="{{ asset('public/assets/flot/jquery.flot.resize.js') }}"></script>
-    <script src="{{ asset('public/assets/gritter/js/jquery.gritter.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('public/assets/js/jquery.pulsate.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('public/assets/bootstrap-daterangepicker/date.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('public/assets/bootstrap-daterangepicker/daterangepicker.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('public/assets/bootstrap/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('public/assets/uniform/jquery.uniform.min.js') }}"></script>
-    <script src="{{ asset('public/assets/js/jquery.blockui.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('public/assets/jquery-validation/dist/jquery.validate.js') }}"></script>
-    <script src="{{ asset('public/assets/js/app.js') }}"></script>
-    <script>
-        jQuery(document).ready(function() {
-            App.initLogin();
-        });
-    </script>
+<script src="public/assets/js/jquery-1.8.3.min.js"></script>
+<!--[if lt IE 9]>
+<script src="public/assets/js/excanvas.js"></script>
+<script src="public/assets/js/respond.js"></script>
+<![endif]-->
+<script src="public/assets/breakpoints/breakpoints.js"></script>
+<script src="public/assets/jquery-ui/jquery-ui-1.10.1.custom.min.js"></script>
+<script src="public/assets/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<script src="public/assets/fullcalendar/fullcalendar/fullcalendar.min.js"></script>
+<script src="public/assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="public/assets/js/jquery.blockui.js"></script>
+<script src="public/assets/js/jquery.cookie.js"></script>
+<script src="public/assets/jqvmap/jqvmap/jquery.vmap.js" type="text/javascript"></script>
+<script src="public/assets/jqvmap/jqvmap/maps/jquery.vmap.russia.js" type="text/javascript"></script>
+<script src="public/assets/jqvmap/jqvmap/maps/jquery.vmap.world.js" type="text/javascript"></script>
+<script src="public/assets/jqvmap/jqvmap/maps/jquery.vmap.europe.js" type="text/javascript"></script>
+<script src="public/assets/jqvmap/jqvmap/maps/jquery.vmap.germany.js" type="text/javascript"></script>
+<script src="public/assets/jqvmap/jqvmap/maps/jquery.vmap.usa.js" type="text/javascript"></script>
+<script src="public/assets/jqvmap/jqvmap/data/jquery.vmap.sampledata.js" type="text/javascript"></script>
+<script src="public/assets/flot/jquery.flot.js"></script>
+<script src="public/assets/flot/jquery.flot.resize.js"></script>
+<script type="text/javascript" src="public/assets/gritter/js/jquery.gritter.js"></script>
+<script type="text/javascript" src="public/assets/uniform/jquery.uniform.min.js"></script>
+<script type="text/javascript" src="public/assets/js/jquery.pulsate.min.js"></script>
+<script type="text/javascript" src="public/assets/bootstrap-daterangepicker/date.js"></script>
+<script type="text/javascript" src="public/assets/bootstrap-daterangepicker/daterangepicker.js"></script>
+<script src="public/assets/js/app.js"></script>
+<script>
+    jQuery(document).ready(function() {
+        App.setPage("index");  // set current page
+        App.init(); // init the rest of plugins and elements
+    });
+</script>
     <!-- END JAVASCRIPTS -->
 </body>
 </html>

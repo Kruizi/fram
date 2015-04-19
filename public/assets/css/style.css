@@ -353,9 +353,11 @@ Header and header elements.
 }
 
 .header .nav > li.dropdown.user .dropdown-toggle .username {
-  color: #ddd;
+  color: #000;
 }
-
+.dropdown-toggle:hover{
+    background-color: #088917 !important;
+}
 .header .nav li.dropdown.user .dropdown-toggle i {
   display: inline-block;
   margin-top: 5px;
@@ -364,19 +366,20 @@ Header and header elements.
 }
 
 .header .nav > li.dropdown .dropdown-toggle .badge {
-  position: absolute;
-  font-size: 11px !important;
-  font-weight: 300;
-  top: 8px;
-  right: 24px;
-  text-align: center;
-  height: 14px;
-  background-color: #e02222;
-  padding: 2px 6px 2px 6px;
-  -webkit-border-radius: 12px !important;
-     -moz-border-radius: 12px !important;
-          border-radius: 12px !important;
-  text-shadow:none !important;
+    position: absolute;
+    font-size: 11px !important;
+    font-weight: 300;
+    top: 8px;
+    right: 24px;
+    text-align: center;
+    height: 10px;
+    background-color: #D82727;
+    padding: 2px 3px 2px 3px;
+    line-height: 10px;
+    -webkit-border-radius: 12px !important;
+    -moz-border-radius: 12px !important;
+    border-radius: 12px !important;
+    text-shadow: none !important;
 }
 
 /* firefox hack for top bar badges */
@@ -3836,7 +3839,7 @@ Login page
     -moz-transition:  0.5s time;
     -ms-transition:  0.5s time;
     -o-transition:  0.5s time;
-    transition:  0.5s time;  
+    transition:  0.5s time;
 }
 
 .login .content .forget-form .form-actions {
