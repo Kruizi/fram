@@ -527,6 +527,7 @@ Page sidebar
 
 .page-sidebar .sidebar-search {
   margin: 8px 20px 20px 20px;
+  display:none;
 }
 
 .page-sidebar .sidebar-search .submit {
@@ -1737,7 +1738,12 @@ General list for item with image
   position: absolute;
   right: 45px;
 }
-
+#container {
+	height: 400px; 
+	min-width: 310px; 
+	max-width: 800px;
+	margin: 0 auto;
+}
 /***
 Custom tables
 ***/
@@ -1748,7 +1754,7 @@ Custom tables
 }
 
 .table thead tr th {
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 600;
 }
 
@@ -2706,8 +2712,9 @@ Dashboard stats
 }
 
 .dashboard-stat .details {
-  float: right;
   padding-right: 10px;
+  height: 60px;
+  line-height: 60px;
 }
 
 .dashboard-stat .details .number {    
@@ -2721,8 +2728,8 @@ Dashboard stats
 }
 
 .dashboard-stat .details .desc {
-  text-align: right;
-  font-size: 16px;
+  text-align: center;
+  font-size: 25px;
   letter-spacing: 0px;
   font-weight: 300;
   color: #fff;
@@ -2781,11 +2788,11 @@ Dashboard stats
 } 
 
 .dashboard-stat.yellow {
-  background-color: #ffb848;
+  background-color: #FFF648;
 }
 
 .dashboard-stat.yellow .more { 
-  background-color: #cb871b;
+  background-color: #DBD335;
 } 
 
 .dashboard-stat.purple {
@@ -3841,6 +3848,7 @@ Login page
     -o-transition:  0.5s time;
     transition:  0.5s time;
 }
+
 
 .login .content .forget-form .form-actions {
   border: 0;

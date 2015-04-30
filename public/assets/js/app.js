@@ -147,130 +147,7 @@ var App = function () {
         });
     }
 
-    var handleJQVMAP = function () {
-
-        var showMap = function (name) {
-            jQuery('.vmaps').hide();
-            jQuery('#vmap_' + name).show();
-        }
-
-        var setMap = function (name) {
-            var data = {
-                map: 'world_en',
-                backgroundColor: null,
-                borderColor: '#333333',
-                borderOpacity: 0.5,
-                borderWidth: 1,
-                color: '#c6c6c6',
-                enableZoom: true,
-                hoverColor: '#c9dfaf',
-                hoverOpacity: null,
-                values: sample_data,
-                normalizeFunction: 'linear',
-                scaleColors: ['#b6da93', '#909cae'],
-                selectedColor: '#c9dfaf',
-                selectedRegion: null,
-                showTooltip: true,
-                onLabelShow: function (event, label, code) {
-
-                },
-                onRegionOver: function (event, code) {
-                    if (code == 'ca') {
-                        event.preventDefault();
-                    }
-                },
-                onRegionClick: function (element, code, region) {
-                    var message = 'You clicked "' + region + '" which has the code: ' + code.toUpperCase();
-                    alert(message);
-                }
-            };
-
-            data.map = name + '_en';
-            var map = jQuery('#vmap_' + name);
-            if (!map) {
-                return;
-            }
-            map.width(map.parent().parent().width());
-            map.show();
-            map.vectorMap(data);
-            map.hide();
-        }
-
-        setMap("world");
-        setMap("usa");
-        setMap("europe");
-        setMap("russia");
-        setMap("germany");
-        showMap("world");
-
-        jQuery('#regional_stat_world').click(function () {
-            showMap("world");
-        });
-
-        jQuery('#regional_stat_usa').click(function () {
-            showMap("usa");
-        });
-
-        jQuery('#regional_stat_europe').click(function () {
-            showMap("europe");
-        });
-        jQuery('#regional_stat_russia').click(function () {
-            showMap("russia");
-        });
-        jQuery('#regional_stat_germany').click(function () {
-            showMap("germany");
-        });
-
-        $('#region_statistics_loading').hide();
-        $('#region_statistics_content').show();
-    }
-
-    var handleAllJQVMAP = function () {
-        var setMap = function (name) {
-            var data = {
-                map: 'world_en',
-                backgroundColor: null,
-                borderColor: '#333333',
-                borderOpacity: 0.5,
-                borderWidth: 1,
-                color: '#c6c6c6',
-                enableZoom: true,
-                hoverColor: '#c9dfaf',
-                hoverOpacity: null,
-                values: sample_data,
-                normalizeFunction: 'linear',
-                scaleColors: ['#b6da93', '#427d1a'],
-                selectedColor: '#c9dfaf',
-                selectedRegion: null,
-                showTooltip: true,
-                onRegionOver: function (event, code) {
-                    //sample to interact with map
-                    if (code == 'ca') {
-                        event.preventDefault();
-                    }
-                },
-                onRegionClick: function (element, code, region) {
-                    //sample to interact with map
-                    var message = 'You clicked "' + region + '" which has the code: ' + code.toUpperCase();
-                    alert(message);
-                }
-            };
-
-            data.map = name + '_en';
-            var map = jQuery('#vmap_' + name);
-            if (!map) {
-                return;
-            }
-            map.width(map.parent().width());
-            map.vectorMap(data);
-        }
-
-        setMap("world");
-        setMap("usa");
-        setMap("europe");
-        setMap("russia");
-        setMap("germany");
-    }
+    
 
     var handleDashboardCalendar = function () {
 
@@ -2372,138 +2249,6 @@ var App = function () {
         });
     }
 
-    var handleDateTimePickers = function () {
-
-        if (jQuery().datepicker) {
-            $('.date-picker').datepicker();
-        }
-
-        if (jQuery().timepicker) {
-            $('.timepicker-default').timepicker();
-            $('.timepicker-24').timepicker({
-                minuteStep: 1,
-                showSeconds: true,
-                showMeridian: false
-            });
-        }
-
-        if (!jQuery().daterangepicker) {
-            return;
-        }
-
-        $('.date-range').daterangepicker();
-
-        $('#dashboard-report-range').daterangepicker({
-            ranges: {
-                'Today': ['today', 'today'],
-                'Yesterday': ['yesterday', 'yesterday'],
-                'Last 7 Days': [Date.today().add({
-                    days: -6
-                }), 'today'],
-                'Last 30 Days': [Date.today().add({
-                    days: -29
-                }), 'today'],
-                'This Month': [Date.today().moveToFirstDayOfMonth(), Date.today().moveToLastDayOfMonth()],
-                'Last Month': [Date.today().moveToFirstDayOfMonth().add({
-                    months: -1
-                }), Date.today().moveToFirstDayOfMonth().add({
-                    days: -1
-                })]
-            },
-            opens: 'left',
-            format: 'MM/dd/yyyy',
-            separator: ' to ',
-            startDate: Date.today().add({
-                days: -29
-            }),
-            endDate: Date.today(),
-            minDate: '01/01/2012',
-            maxDate: '12/31/2014',
-            locale: {
-                applyLabel: 'Submit',
-                fromLabel: 'From',
-                toLabel: 'To',
-                customRangeLabel: 'Custom Range',
-                daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
-                monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-                firstDay: 1
-            },
-            showWeekNumbers: true,
-            buttonClasses: ['btn-danger']
-        },
-
-        function (start, end) {
-            App.blockUI(jQuery("#dashboard"));
-            setTimeout(function () {
-                App.unblockUI(jQuery("#dashboard"));
-                $.gritter.add({
-                    title: 'Dashboard',
-                    text: 'Dashboard date range updated.'
-                });
-                App.scrollTo();
-            }, 1000);
-            $('#dashboard-report-range span').html(start.toString('MMMM d, yyyy') + ' - ' + end.toString('MMMM d, yyyy'));
-
-        });
-
-        $('#dashboard-report-range').show();
-
-        $('#dashboard-report-range span').html(Date.today().add({
-            days: -29
-        }).toString('MMMM d, yyyy') + ' - ' + Date.today().toString('MMMM d, yyyy'));
-
-        $('#form-date-range').daterangepicker({
-            ranges: {
-                'Today': ['today', 'today'],
-                'Yesterday': ['yesterday', 'yesterday'],
-                'Last 7 Days': [Date.today().add({
-                    days: -6
-                }), 'today'],
-                'Last 30 Days': [Date.today().add({
-                    days: -29
-                }), 'today'],
-                'This Month': [Date.today().moveToFirstDayOfMonth(), Date.today().moveToLastDayOfMonth()],
-                'Last Month': [Date.today().moveToFirstDayOfMonth().add({
-                    months: -1
-                }), Date.today().moveToFirstDayOfMonth().add({
-                    days: -1
-                })]
-            },
-            opens: 'right',
-            format: 'MM/dd/yyyy',
-            separator: ' to ',
-            startDate: Date.today().add({
-                days: -29
-            }),
-            endDate: Date.today(),
-            minDate: '01/01/2012',
-            maxDate: '12/31/2014',
-            locale: {
-                applyLabel: 'Submit',
-                fromLabel: 'From',
-                toLabel: 'To',
-                customRangeLabel: 'Custom Range',
-                daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
-                monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-                firstDay: 1
-            },
-            showWeekNumbers: true,
-            buttonClasses: ['btn-danger']
-        },
-
-        function (start, end) {
-            $('#form-date-range span').html(start.toString('MMMM d, yyyy') + ' - ' + end.toString('MMMM d, yyyy'));
-        });
-
-        $('#form-date-range span').html(Date.today().add({
-            days: -29
-        }).toString('MMMM d, yyyy') + ' - ' + Date.today().toString('MMMM d, yyyy'));
-
-
-        if (!jQuery().datepicker || !jQuery().timepicker) {
-            return;
-        }
-    }
 
     var handleClockfaceTimePickers = function () {
 
@@ -3233,7 +2978,6 @@ var App = function () {
             // page level handlers
             if (App.isPage("index")) {
                 handleDashboardCharts(); // handles plot charts for main page
-                handleJQVMAP(); // handles vector maps for home page
                 handleDashboardCalendar(); // handles full calendar for main page
                 handleChat(); // handles chat samples
                 //handleIntro(); // this is for demo purpose. you may enable or disable this function.
@@ -3285,7 +3029,6 @@ var App = function () {
             handleChoosenSelect(); // handles bootstrap chosen dropdowns
             handleScrollers(); // handles slim scrolling contents            
             handleTagsInput() // handles tag input elements
-            handleDateTimePickers(); //handles form timepickers
             handleClockfaceTimePickers(); //handles form clockface timepickers
             handleColorPicker(); // handles form color pickers            
             handlePortletTools(); // handles portlet action bar functionality(refresh, configure, toggle, remove)

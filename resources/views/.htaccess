@@ -1,0 +1,41 @@
+#php_flag register_globals off
+#php_value error_reporting 0
+
+DirectoryIndex index.php
+Options -Indexes 
+
+AddDefaultCharset windows-1251
+AddType text/csv csv
+RewriteEngine On
+#Options FollowSymLinks
+#Options SymLinksIfOwnerMatch
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php
+RewriteCond %{REQUEST_URI} ^/page38.html/$
+RewriteRule ^.*$ http://bookshop247.com/? [R=301,L]
+
+RewriteCond %{QUERY_STRING} ^(utm_source=vkontakte)[.]
+
+RewriteRule ^(/) /$1 [R=301,L]
+ErrorDocument 404 /
+<IfModule mod_expires.c>
+	ExpiresActive on
+	ExpiresByType image/jpeg "access plus 3 day"
+	ExpiresByType image/gif "access plus 3 day"
+</IfModule>
+ 
+<files *.lic>
+Order Deny,Allow
+Deny From All
+</files>
+<files *.ini>
+Order Deny,Allow
+Deny From All
+</files>
+<files *.tpl>
+Order Deny,Allow
+Deny From All
+</files>
+Redirect 301 /page/page3.html  http://bookshop247.com/gbook

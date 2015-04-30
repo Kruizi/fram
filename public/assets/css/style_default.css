@@ -6,18 +6,52 @@ default theme
 Reset and overrides  
 ***/
 body { 
-  background-color:#3d3d3d !important;
+  background-color:#FFFFFF !important;
 }
 
 /***
 Page header
 ***/
-.header .navbar-inner {
-  filter:none !important;
-  background-image: none !important;
-  background-color: #00B015 !important;
+.span3.responsive {
+  margin: 1px;
 }
-
+.brand h2 {
+  color: rgb(201, 201, 201);
+  margin: 0px;
+}
+ul.dropdown-menu.extended.notification {
+    height: 283px;
+    overflow: hidden;
+}
+ul.dropdown-menu.extended.notification li {
+    position: relative;
+}
+i.fa.fa-times {
+    position: absolute !important;
+    right: 5px !important;
+    top: 5px !important;
+    z-index: 1;
+    cursor: pointer;
+    -webkit-transition: 0.5s time;
+    -moz-transition: 0.5s time;
+    -ms-transition: 0.5s time;
+    -o-transition: 0.5s time;
+    transition: 0.5s time;
+}
+i.fa.fa-times:hover
+{
+    color:indianred;
+}
+.header .navbar-inner {
+  filter: none !important;
+  background-image: none !important;
+  background-color: #FFFFFF !important;
+  border-bottom: 1px solid rgb(240, 240, 240);
+}
+.page-sidebar.nav-collapse.collapse {
+  background-color: white;
+  border-right: 1px solid rgb(240, 240, 240);
+}
 .header .btn-navbar {  
   background-color: #1f1f1f !important;
 } 
@@ -35,8 +69,9 @@ Page header
 Page sidebar
 ***/
 .page-sidebar > ul > li > a {
-  border-top: 1px solid #595959 !important;
-  color: #fff !important;
+  border-top: 1px solid #F0F0F0 !important;
+  color: #000 !important;
+  font-weight: 600;
 }
 
 .page-sidebar > ul > li:last-child > a {
@@ -54,11 +89,11 @@ Page sidebar
 .page-sidebar > ul > li.has-sub.open >a, 
 .page-sidebar > ul > li >a:hover, 
 .page-sidebar > ul > li:hover>a {  
-  background: #313131;
+  background: rgba(3, 173, 5, 0.36);
 }
 
 .page-sidebar > ul > li.active > a {
-  background: #e02222 !important;  
+  background: #03AD05 !important;  
   border-top-color: transparent !important;
   color:#fff;
 }  
@@ -73,7 +108,7 @@ Page sidebar
 
 .page-sidebar ul > li > a .arrow:before,
 .page-sidebar > ul > li > a .arrow.open:before {  
-   color: #919091 !important;
+   color: #03AD05 !important;
 }
 
 .page-sidebar ul > li.active > a .arrow:before,
@@ -82,7 +117,7 @@ Page sidebar
 }
 
 .page-sidebar > ul > li > ul.sub > li > a {
-  color: #fff;
+  color: #000;
   margin-left:0px;  
   padding-left: 5px; 
 }

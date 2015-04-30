@@ -3,27 +3,45 @@ use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\Auth;
 use Laravel\People;
 use Request;
+use DB;
 
 class WelcomeController extends SettingsController {
+    
     /**
      * Create a new controller instance.
      *
      * @return void
      */
     public function __construct()
-    {
+    { 
         $this->middleware('auth');
     }
 
-    public function index(Authenticatable $user)
+    public function index(Authenticatable $user )
     {
-        /**
-         * @return array BD
-         */
-        $good = People::allData();
-        Auth::user();
+            $name = $user->name;
+            $client = DB::table('clients')->get();
+            $ind = People::countBDnot();
+            $notification = People::notification();
+            $title = 'Главная';
+            return view('index', compact('name','client', 'ind', 'notification', 'title'));       
+    }
+
+    public function status($id,Authenticatable $user )
+    {
         $name = $user->name;
-        return view('index', compact('good', 'name'));
+        $ind = People::countBDnot();
+        $notification = People::notification();
+        $info_clients = DB::table('clients')->where('indeficators', $id)->first();    
+        $imgWebArray = (object)['webClients' => $info_clients->web_clients,
+                        'webNameClients' => $info_clients->name_clients,
+                        'imgDate' => $info_clients->img_date,
+                        'indeficators' => $info_clients->indeficators]; 
+        $dd = $this->staticWeb($info_clients->web_clients);              
+        $format_size = $this->format_size($dd[3]);
+        $this->imgWeb($imgWebArray);
+        $title = $info_clients->name_clients;
+        return view('edit', compact('info_clients', 'name', 'dd', 'ind', 'notification', 'format_size', 'title'));
     }
 
     public function getUrl(){
